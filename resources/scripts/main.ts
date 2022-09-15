@@ -5,8 +5,9 @@ import { resolvePageComponent } from 'vite-plugin-laravel/inertia'
 createInertiaApp({
 	resolve: (name) => resolvePageComponent(name, import.meta.glob('../views/pages/**/*.vue')),
 	setup({ el, app, props, plugin }) {
-		createApp({ render: () => h(app, props) })
+        createApp({ render: () => h(app, props) })
 			.use(plugin)
+            .mixin({ methods: { route: window.route } })
 			.mount(el)
 	},
 })
